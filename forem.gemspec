@@ -26,4 +26,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'forem-redcarpet', '1.0.0'
   s.add_dependency 'workflow', '0.8.0'
   s.add_dependency 'friendly_id', '~> 4.0'
+  s.add_dependency 'resque'
+  s.add_dependency 'resque_mailer'
 end

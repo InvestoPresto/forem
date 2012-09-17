@@ -1,5 +1,6 @@
 module Forem
   class SubscriptionMailer < ActionMailer::Base
+  	include Resque::Mailer
     default :from => Forem.email_from_address
 
     def topic_reply(post_id, subscriber_id)
