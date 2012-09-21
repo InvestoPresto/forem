@@ -11,6 +11,7 @@ PATH
       cancan (= 1.6.7)
       forem-redcarpet (= 1.0.0)
       friendly_id (~> 4.0)
+      postageapp
       rails (~> 3.1)
       resque
       resque_mailer
@@ -104,6 +105,8 @@ GEM
     orm_adapter (0.4.0)
     pg (0.14.1)
     polyglot (0.3.3)
+    postageapp (1.0.15)
+      json
     pygments.rb (0.2.4)
       rubypython (~> 0.5.3)
     rack (1.4.1)
