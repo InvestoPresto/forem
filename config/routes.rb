@@ -6,12 +6,18 @@ Forem::Engine.routes.draw do
       member do
         get :subscribe
         get :unsubscribe
+        get :spam_vote
       end
     end
   end
 
   resources :topics do
-    resources :posts
+    resources :posts do
+      member do
+        post :vote
+        post :spam
+      end
+    end
   end
 
   get 'forums/:forum_id/moderation', :to => "moderation#index", :as => :forum_moderator_tools

@@ -67,6 +67,20 @@ module Forem
 
     end
 
+    def vote
+      value = params[:type] == "up" ? 1 : -1
+      @post = Post.find(params[:id])
+      @post.add_or_update_evaluation(:votes, value, forem_user)
+      redirect_to :back, notice: t("forem.post.voted")
+    end
+
+    def spam
+      @post = Post.find(params[:id])
+      @post.add_spam_vote_and_check(forem_user)
+      redirect_to :back, notice: t("forem.topic.spam_detected")
+    end
+
+
     private
 
     def find_topic

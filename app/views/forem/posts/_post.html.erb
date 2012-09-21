@@ -5,7 +5,16 @@
     <div class='username'>
       <%= link_to_if Forem.user_profile_links, post.user, [main_app, post.user] %>
     </div>
-    <div class='icon'><%= forem_avatar(post.user, :size => 60) %></div>
+    <div class='icon'><%= forem_avatar(post.user, :size => 60) %>
+    </div>
+
+  <span class = "forem_votes">
+    <%= pluralize post.reputation_for(:votes), "vote" %>
+  <% if forem_user && !forem_user.voted_for?(post) %>
+    |<%= link_to "up", vote_topic_post_path(post.topic_id, post, type: "up"), method: "post" %>
+    |<%= link_to "down", vote_topic_post_path(post.topic_id, post, type: "down"), method: "post" %>
+  <% end %>
+  </span>
   </div>
 
   <div class='contents'>
@@ -37,14 +46,14 @@
 
     <ul class='actions'>
       <% if forem_user %>
-        <% if can?(:reply, post.topic) %>
-          <% if post.topic.can_be_replied_to? %>
-            <li><%= link_to t('reply', :scope => 'forem.topic'), forem.new_topic_post_path(post.topic, :reply_to_id => post.id) %></li>
+        <%# if can?(:reply, post.topic) %>
+          <%# if post.topic.can_be_replied_to? %>
+           <!--  <li><%#= link_to t('reply', :scope => 'forem.topic'), forem.new_topic_post_path(post.topic, :reply_to_id => post.id) %></li> -->
+          <%# end %>
+        <%# end %>
+        <% unless forem_user.voted_for_spam?(post) %>
+            <li><%= link_to t(".spam"), spam_topic_post_path(post.topic_id, post), method: "post" %></li>
           <% end %>
-          <% if post.topic.can_be_replied_to? %>
-            <li><%= link_to t('quote', :scope => 'forem.topic'), forem.new_topic_post_path(post.topic, :reply_to_id => post.id, :quote => true) %></li>
-          <% end %>
-        <% end %>
         <% if post.owner_or_admin?(forem_user) %>
           <% if can?(:edit_post, post.topic.forum) %>
             <li><%= link_to t('edit', :scope => 'forem.post'), forem.edit_topic_post_path(post.topic, post) %></li>

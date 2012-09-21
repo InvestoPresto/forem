@@ -1,7 +1,7 @@
 en:
   forem:
     general:
-      forum: Forum
+      forum: Catageory
       topics: Topics
       topic: Topic
       posts: Posts
@@ -64,7 +64,7 @@ en:
       access_denied: Access denied.
     forum:
       header: "Viewing %{title}"
-      forums: Forums
+      forums: Discussions
       new: Creating a new forum
       edit: "Editing the %{title} forum"
       topics_count:
@@ -78,7 +78,7 @@ en:
       moderator_tools: "Moderation Tools"
     forums:
       index:
-        title: Forums
+        title: Discussions
         forum: Forum
         views: Views
         last_post: 'Last Post:'
@@ -107,6 +107,7 @@ en:
       subscribed: You have subscribed to this topic.
       unsubscribed: You have unsubscribed from this topic.
       none: There are no topics in this forum currently.
+      spam_detected: Thank you for detecting a spam post .
       links:
         new: New topic
         back_to_topics: Back to topics
@@ -129,6 +130,7 @@ en:
         unsubscribe: Unsubscribe
         reply_to_topic: Reply to Topic
         pending_review: This topic is currently pending review. Only the user who created it and moderators can view it.
+        spam: Report spam
         hide:
           'true': Show this topic
           'false': Hide this topic
@@ -153,6 +155,7 @@ en:
       deleted_with_topic: Only post in topic deleted. Topic also deleted.
       cannot_delete: You cannot delete a post you do not own.
       in_reply_to: In reply to
+      voted: Thank you for voting.
     posts:
       moderation:
         moderate: Moderate
@@ -161,6 +164,7 @@ en:
         success: The selected posts have been moderated.
       post:
         pending_review: This post is currently pending review. Only the user who posted it and moderators can view it.
+        spam: Report spam
     moderation:
       title: "Moderation tools for %{forum}"
   helpers:
@@ -169,20 +173,20 @@ en:
         create: Create Forum
         update: Update Forum
       topic:
-        create: Create Topic
-        update: Update Topic
+        create: Create Post
+        update: Update Post
   simple_form:
     labels:
       forum:
         title: Title
         description: Description
       topic:
-        subject: Subject
+        subject: Title
         locked: Locked
         pinned: Pinned
         hidden: Hidden
         posts:
-          text: Text
+          text: What are you thinking ?
       post:
         text: Text
 

@@ -1,10 +1,12 @@
 # Fix for #185 and build issues
 require 'active_support/core_ext/kernel/singleton_class'
+require 'reputation_system'
 
 require 'forem/engine'
 require 'forem/autocomplete'
 require 'forem/default_permissions'
 require 'workflow'
+
 
 module Forem
   mattr_accessor :user_class, :theme, :formatter, :default_gravatar, :default_gravatar_image,

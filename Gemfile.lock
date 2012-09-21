@@ -8,6 +8,7 @@ PATH
   remote: .
   specs:
     forem (1.0.0.beta1)
+      activerecord-reputation-system
       cancan (= 1.6.7)
       forem-redcarpet (= 1.0.0)
       friendly_id (~> 4.0)
@@ -42,6 +43,7 @@ GEM
       activesupport (= 3.2.8)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
+    activerecord-reputation-system (1.5.0)
     activeresource (3.2.8)
       activemodel (= 3.2.8)
       activesupport (= 3.2.8)

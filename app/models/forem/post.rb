@@ -2,6 +2,8 @@ module Forem
   class Post < ActiveRecord::Base
     include Workflow
 
+    SPAM_LIMIT = -10
+
     workflow_column :state
     workflow do
       state :pending_review do
@@ -24,6 +26,14 @@ module Forem
     has_many :replies, :class_name  => "Post",
                        :foreign_key => "reply_to_id",
                        :dependent   => :nullify
+
+    has_reputation :votes,
+                   :source => :user,
+                   :aggregated_by => :sum
+
+    has_reputation :spam_votes,
+                   :source => :user,
+                   :aggregated_by => :sum
 
     validates :text, :presence => true
 
@@ -87,6 +97,12 @@ module Forem
 
     def owner_or_admin?(other_user)
       user == other_user || other_user.forem_admin?
+    end
+
+    def add_spam_vote_and_check(user)
+      value = -1
+      add_evaluation(:spam_votes, value, user)
+      update_attribute(:state ,'pending_review') if reputation_for(:spam_votes).to_i <= SPAM_LIMIT
     end
 
     protected

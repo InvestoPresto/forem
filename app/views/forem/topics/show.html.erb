@@ -14,11 +14,17 @@
       <% else %>
         <%= link_to t(".unsubscribe"), forem.unsubscribe_forum_topic_path(@forum, @topic) %>
       <% end %>
+      <% unless forem_user.voted_for_spam?(@topic) %>
+        <%= link_to t(".spam"), spam_vote_forum_topic_path(@forum, @topic) %>
+      <% end %>
+        <%= link_to t('facebook.post_wall'), facebook_share_url(forem_topic_fb_hsh(@topic)),
+       :class =>'btn btn-primary' %>
+
     <% end %>
   </menu>
 
   <% if forem_admin? %>
-    <%= link_to t(".hide.#{@topic.hidden}"), forem.toggle_hide_admin_topic_path(@topic), :method => :put %> | 
+    <%= link_to t(".hide.#{@topic.hidden}"), forem.toggle_hide_admin_topic_path(@topic), :method => :put %> |
     <%= link_to t(".lock.#{@topic.locked}"), forem.toggle_lock_admin_topic_path(@topic), :method => :put %> |
     <%= link_to t(".pin.#{@topic.pinned}"), forem.toggle_pin_admin_topic_path(@topic), :method => :put %>
   <% end %>
@@ -39,6 +45,12 @@
   <div id='posts'>
     <%= render :partial => "forem/posts/post", :collection => @posts %>
   </div>
+
+  <menu>
+    <% if @topic.can_be_replied_to? && can?(:reply, @topic) %>
+      <%= link_to t(".reply"), forem.new_topic_post_path(@topic) %>
+    <% end %>
+  </menu>
 
   <%= forem_pages_widget(@posts) %>
 </div>

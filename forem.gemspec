@@ -29,4 +29,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'resque'
   s.add_dependency 'resque_mailer'
   s.add_dependency 'postageapp'
+  s.add_dependency 'activerecord-reputation-system'
 end
