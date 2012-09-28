@@ -110,6 +110,7 @@ en:
       spam_detected: Thank you for detecting a spam post .
       links:
         new: Start a topic
+        back_to_topic: Back to topic
         back_to_topics: Back to topics
         edit: Edit topic
       not_found: The topic you are looking for could not be found.

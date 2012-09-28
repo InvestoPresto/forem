@@ -5,7 +5,7 @@
 
       <menu>
         <% if @topic.user == forem_user || forem_admin? %>
-          %= link_to t(".delete"), forem.forum_topic_path(@forum, @topic), :method => :delete, :confirm => t("are_you_sure"),:class =>'btn btn-danger btn-mini' %>
+          <%= link_to t(".delete"), forem.forum_topic_path(@forum, @topic), :method => :delete, :confirm => t("are_you_sure"),:class =>'btn btn-danger btn-mini' %>
         <% end %>
         <% if forem_user %>
           <% if !@topic.subscriber?(forem_user.id) %>
@@ -49,10 +49,11 @@
         <div class= "span10">
           <% if forem_user %>
             <%= simple_form_for [forem, @topic, @topic.posts.new] do |f| %>
-            <div class= "your-comment">
-            <%= f.input :text ,:label => t('.your_comment') %>
-            <%= f.submit t("forem.post.buttons.reply") ,:class =>'btn btn-success btn-mini'%>
+              <div class= "your-comment">
+              <%= f.input :text ,:label => t('.your_comment') %>
             </div>
+            <%= f.submit t("forem.post.buttons.reply") ,:class =>'btn btn-success btn-mini'%>
+
             <% end %>
           <% else %>
             <menu>

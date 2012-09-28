@@ -1,12 +1,15 @@
-<%= render :partial => 'forem/forums/head', :locals => { :forum => @topic.forum } %>
+<%= render :partial => 'forem/forums/topic_head', :locals => { :forum => @topic.forum } %>
 
 <div class= "row">
   <div class= "span9">
     <h2><%= t("forem.post.edit") %></h2>
 
     <%= simple_form_for [forem, @topic, @post] do |f| %>
-      <%= render :partial => "form", :locals => { :f => f } %>
-      <%= f.submit t("forem.post.buttons.edit"), :class => 'btn btn-success btn-mini' %>
+      <div class= "your-comment">
+        <%= render :partial => "form", :locals => { :f => f } %>
+      </div>
+        <%= f.submit t("forem.post.buttons.edit"), :class => 'btn btn-success btn-mini' %>
+
     <% end %>
   </div>
   <div class= "span3"></div>
