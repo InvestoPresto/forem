@@ -1,10 +1,10 @@
 en:
   forem:
     general:
-      forum: Catageory
+      forum: Category
       topics: Topics
       topic: Topic
-      posts: Posts
+      posts: Comments
       posts_count:
         zero: No posts
         one: 1 post
@@ -87,7 +87,7 @@ en:
       headings:
         topic: Topic
         latest: Latest
-        posts: Posts
+        posts: Comments
         views: Views
       moderation:
         success: The selected topic has been moderated.
@@ -106,10 +106,10 @@ en:
       not_updated: This topic could not be updated.
       subscribed: You have subscribed to this topic.
       unsubscribed: You have unsubscribed from this topic.
-      none: There are no topics in this forum currently.
+      none: There are no topics in this catageory.
       spam_detected: Thank you for detecting a spam post .
       links:
-        new: New topic
+        new: Start a topic
         back_to_topics: Back to topics
         edit: Edit topic
       not_found: The topic you are looking for could not be found.
@@ -126,9 +126,11 @@ en:
       show:
         reply: Reply
         delete: Delete
-        subscribe: Subscribe
-        unsubscribe: Unsubscribe
+        subscribe: Follow Topic
+        unsubscribe: Stop Following
         reply_to_topic: Reply to Topic
+        facebook_wall: Share on Facebook
+        your_comment: Your Comment
         pending_review: This topic is currently pending review. Only the user who created it and moderators can view it.
         spam: Report spam
         hide:
@@ -142,11 +144,11 @@ en:
           'false': Pin this topic
     post:
       buttons:
-        reply: Post Reply
-        edit: Edit
+        reply: Post
+        edit: Update Comment
       created: Your reply has been posted.
       new: Post reply to
-      edit: Edit
+      edit: Edit Comment
       not_created: Your reply could not be posted.
       not_created_topic_locked: You cannot reply to a locked topic.
       edited: Your post has been edited.
@@ -173,8 +175,8 @@ en:
         create: Create Forum
         update: Update Forum
       topic:
-        create: Create Post
-        update: Update Post
+        create: Create Topic
+        update: Update Topic
   simple_form:
     labels:
       forum:
@@ -188,7 +190,7 @@ en:
         posts:
           text: What are you thinking ?
       post:
-        text: Text
+        text: Your Comment
 
   # General stuff
   time_ago_in_words: "%{time} ago"

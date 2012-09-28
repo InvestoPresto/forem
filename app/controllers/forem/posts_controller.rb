@@ -7,11 +7,7 @@ module Forem
     def new
       authorize! :reply, @topic
       @post = @topic.posts.build
-      @reply_to_post = @topic.posts.find_by_id(params[:reply_to_id])
-
-      if params[:quote]
-        @post.text = view_context.forem_quote(@reply_to_post.text)
-      end
+      redirect_to forum_topic_path(@topic.forum, @topic)
     end
 
     def create
