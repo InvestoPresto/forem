@@ -6,7 +6,7 @@
 
     <%= simple_form_for [forem, @topic, @post] do |f| %>
       <%= render :partial => "form", :locals => { :f => f } %>
-      <%= f.submit t("forem.post.buttons.edit"), :class => 'btn btn-success btn-mini' %>
+      <%= f.submit t("forem.post.buttons.edit"), :class => 'btn btn-success btn-small' %>
     <% end %>
   </div>
   <div class= "span3"></div>

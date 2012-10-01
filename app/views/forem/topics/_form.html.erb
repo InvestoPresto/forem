@@ -1,9 +1,9 @@
 <%= simple_form_for [forem, @forum, @topic] do |f| %>
+  <div class="input-big">
   <%= f.input :subject %>
-
   <%= f.simple_fields_for :posts do |post| %>
     <%= render :partial => "forem/posts/form", :locals => { :f => post }%>
   <% end %>
-  
-  <%= f.button :submit, :class => 'btn btn-primary btn-mini'  %>
+  </div>
+  <%= f.button :submit, :class => 'btn btn-success btn-small'  %>
 <% end %>

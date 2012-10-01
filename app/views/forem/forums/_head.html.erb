@@ -7,7 +7,7 @@
       <menu id='forum_topic_links'>
         <% unless @topic.try(:new_record?) %>
           <% if can? :create_topic, @forum %>
-            <%= link_to t('forem.topic.links.new'), forem.new_forum_topic_path(forum), :class => 'btn btn-success btn-mini' %>
+            <%= link_to t('forem.topic.links.new'), forem.new_forum_topic_path(forum), :class => 'btn btn-success btn-small' %>
           <% end %>
         <% end %>
         <% if @topic %>
