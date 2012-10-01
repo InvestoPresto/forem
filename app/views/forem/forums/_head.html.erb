@@ -6,7 +6,7 @@
       <small><%= forum.description %></small>
       <menu id='forum_topic_links'>
           <% if forem_user %>
-            <%= link_to t('forem.topic.links.new'), main_app.new_iqanda_path("topic[category_name]" => params[:id]), :class => 'btn btn-success btn-small' %>
+            <%= link_to t('forem.topic.links.new'), main_app.new_iqanda_path(:topic => {:category_name => forem.title}), :class => 'btn btn-success btn-small' %>
           <% end %>
         <% if @topic %>
           <%= link_to t('forem.topic.links.back_to_topics'), forem.forum_path(forum) %>

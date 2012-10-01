@@ -50,10 +50,10 @@
         <div class= "span10">
           <% if forem_user %>
             <%= simple_form_for [forem, @topic, @topic.posts.new] do |f| %>
-              <div class= "input-big">
+            <div class= "input-big">
               <%= f.input :text ,:label => t('.your_comment') %>
+              <%= f.submit t("forem.post.buttons.reply") ,:class =>'btn btn-success btn-small'%>
             </div>
-            <%= f.submit t("forem.post.buttons.reply") ,:class =>'btn btn-success btn-small'%>
 
             <% end %>
           <% else %>
