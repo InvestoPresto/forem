@@ -5,10 +5,10 @@
     <h2><%= t("forem.post.edit") %></h2>
 
     <%= simple_form_for [forem, @topic, @post] do |f| %>
-      <div class= "your-comment">
+      <div class= "input-big">
         <%= render :partial => "form", :locals => { :f => f } %>
       </div>
-        <%= f.submit t("forem.post.buttons.edit"), :class => 'btn btn-success btn-mini' %>
+        <%= f.submit t("forem.post.buttons.edit"), :class => 'btn btn-success btn-small' %>
 
     <% end %>
   </div>
