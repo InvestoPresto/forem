@@ -29,6 +29,7 @@ module Forem
 
     has_reputation :votes,
                    :source => :user,
+                   :scopes => [:negative, :positive],
                    :aggregated_by => :sum
 
     has_reputation :spam_votes,

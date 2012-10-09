@@ -5,6 +5,8 @@ module Forem
     include Forem::Concerns::Viewable
     include Workflow
 
+    default_scope order('views_count desc')
+
     SPAM_LIMIT = -10
 
     workflow_column :state

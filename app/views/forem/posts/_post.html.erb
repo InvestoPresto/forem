@@ -34,15 +34,21 @@
               <a href='#post-<%= post.id %>'>
                 <time datetime="<%= post.created_at.to_s(:db) -%>"><%= "#{time_ago_in_words(post.created_at)} #{t("ago")}" %></time>
               </a>
-              <span class = "forem_votes">
-                <%= pluralize post.reputation_for(:votes), "vote" %>
-              <% if forem_user && !forem_user.voted_for?(post) %>
-                |<%= link_to "up", vote_topic_post_path(post.topic_id, post, type: "up"), method: "post" %>
-                |<%= link_to "down", vote_topic_post_path(post.topic_id, post, type: "down"), method: "post" %>
-              <% end %>
-              </span>
             </div>
             <div class='span6 align-right'>
+              <span class = "forem_votes">
+                  <% if forem_user %>
+                    <%= link_to image_tag('thumbs_up.png'), vote_topic_post_path(post.topic_id, post, type: "up"), method: "post" %>
+                    <strong class='green'><%= post.reputation_for(:votes, :positive).to_i %></strong>
+                    <%= link_to image_tag('thumbs_down.png'), vote_topic_post_path(post.topic_id, post, type: "down"), method: "post" %>
+                    <strong class='red'><%= post.reputation_for(:votes, :negative).to_i.abs %></strong>
+                  <% else %>
+                    <%= link_to image_tag('thumbs_up.png'), login_and_go_to(forem.forum_topic_path(post.topic.forum, post.topic)) %>
+                    <strong class='green'><%= post.reputation_for(:votes, :positive).to_i %></strong>
+                    <%= link_to image_tag('thumbs_down.png'), login_and_go_to(forem.forum_topic_path(post.topic.forum, post.topic)) %>
+                    <strong class='red'><%= post.reputation_for(:votes, :negative).to_i.abs %></strong>
+                  <% end %>
+              </span>
               <% if forem_user %>
                 <% unless forem_user.voted_for_spam?(post) %>
                     <%= link_to(spam_topic_post_path(post.topic_id, post), method: "post", :title => t('.spam')) do %>

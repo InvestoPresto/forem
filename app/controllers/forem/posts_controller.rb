@@ -64,9 +64,19 @@ module Forem
     end
 
     def vote
-      value = params[:type] == "up" ? 1 : -1
+      if params[:type] == 'up'
+        value = 1
+        scope = :positive
+      else
+        value =  -1
+        scope = :negative
+      end
       @post = Post.find(params[:id])
-      @post.add_or_update_evaluation(:votes, value, forem_user)
+
+      unless @post.evaluators_for(:votes, :negative).include?(forem_user) || @post.evaluators_for(:votes, :positive).include?(forem_user)
+        @post.add_or_update_evaluation(:votes, value, forem_user, scope)
+      end
+
       redirect_to :back, notice: t("forem.post.voted")
     end
 
