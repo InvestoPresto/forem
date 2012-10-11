@@ -1,8 +1,8 @@
-<div class= "row">
-  <div class= "span9">
+<div class= "row-fluid">
+  <div class= "span12">
     <a name='post-<%= post.id %>'></a>
     <div id='post_<%= post_counter + 1 %>' class='post <%= cycle('odd', 'even') -%>'>
-      <div class= "row-fluid show-grid">
+      <div class= "row-fluid">
         <div class= "span1">
           <div class='user'>
             <div class='icon'><%= forem_avatar(post.user, :size => 60) %>
@@ -25,8 +25,8 @@
               <% end %>
             </div>
           <% end %>
-
-          <div class='row-fluid comment-header'>
+          <div class= 'comment-header'>
+          <div class='row-fluid'>
             <div class='span8'>
               <div class='username'>
                 <%= link_to_if Forem.user_profile_links, post.user, [main_app, post.user] %>
@@ -73,18 +73,18 @@
               </div>
             </div>
           </div>
-
-          <%= forem_format(post.text) %>
+          </div>
+          <div><%= forem_format(post.text) %>
 
           <% if post.reply_to %>
             <span class='in_reply_to'>
               <%= link_to "#{t("forem.post.in_reply_to")} #{post.reply_to.user}", "#post-#{post.reply_to.id}" %>
             </span>
           <% end %>
-
         </div>
       </div>
     </div>
     </div>
   </div>
+  <div class= "span4"></div>
 </div>
