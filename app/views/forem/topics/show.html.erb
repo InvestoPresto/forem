@@ -1,44 +1,75 @@
-<div id='topic' class='<%= 'un' unless @topic.locked? %>locked'>
-  <%= render :partial => 'forem/topics/head', :locals => { :topic => @topic } %>
-
-  <menu>
-    <% if @topic.can_be_replied_to? && can?(:reply, @topic) %>
-      <%= link_to t(".reply"), forem.new_topic_post_path(@topic) %>
-    <% end %>
-    <% if @topic.user == forem_user || forem_admin? %>
-      <%= link_to t(".delete"), forem.forum_topic_path(@forum, @topic), :method => :delete, :confirm => t("are_you_sure") %>
-    <% end %>
-    <% if forem_user %>
-      <% if !@topic.subscriber?(forem_user.id) %>
-        <%= link_to t(".subscribe"), forem.subscribe_forum_topic_path(@forum, @topic) %>
-      <% else %>
-        <%= link_to t(".unsubscribe"), forem.unsubscribe_forum_topic_path(@forum, @topic) %>
-      <% end %>
-    <% end %>
-  </menu>
-
-  <% if forem_admin? %>
-    <%= link_to t(".hide.#{@topic.hidden}"), forem.toggle_hide_admin_topic_path(@topic), :method => :put %> | 
-    <%= link_to t(".lock.#{@topic.locked}"), forem.toggle_lock_admin_topic_path(@topic), :method => :put %> |
-    <%= link_to t(".pin.#{@topic.pinned}"), forem.toggle_pin_admin_topic_path(@topic), :method => :put %>
-  <% end %>
-
-  <% if @topic.pending_review? %>
-    <div class="moderation" id='topic_moderation'>
-      <%= t(".pending_review") %>
-      <% if forem_admin_or_moderator?(@topic.forum) %>
-        <%= form_for @topic, :url => forem.moderate_forum_topic_path(@topic.forum, @topic), :method => :put do |f| %>
-          <%= render "forem/moderation/options", :f => f %>
+<div class= "row show-grid">
+  <div class= "span9">
+    <div id='topic' class='<%= 'un' unless @topic.locked? %>locked'>
+      <%= render :partial => 'forem/topics/head', :locals => { :topic => @topic } %>
+      <menu>
+        <% if @topic.user == forem_user || forem_admin? %>
+          <%= link_to t(".delete"), forem.forum_topic_path(@forum, @topic), :method => :delete, :confirm => t("are_you_sure"),:class =>'btn btn-danger btn-small' %>
         <% end %>
+        <% if forem_user %>
+          <% if !@topic.subscriber?(forem_user.id) %>
+            <%= link_to t(".subscribe"), forem.subscribe_forum_topic_path(@forum, @topic),:class =>'btn btn-warning btn-small' %>
+          <% else %>
+            <%= link_to t(".unsubscribe"), forem.unsubscribe_forum_topic_path(@forum, @topic),:class =>'btn btn-warning btn-small' %>
+          <% end %>
+          <% unless forem_user.voted_for_spam?(@topic) %>
+            <%= link_to t(".spam"), spam_vote_forum_topic_path(@forum, @topic),:class =>'btn btn-danger btn-small' %>
+          <% end %>
+            <%= link_to t('.facebook_wall'), facebook_share_url(forem_topic_fb_hsh(@topic)),
+           :class =>'btn btn-primary btn-small' %>
+            <%= link_to t('forem.topic.links.new'), main_app.new_iqanda_path("topic[category_name]" => params[:forum_id]), :class => 'btn btn-success btn-small' %>
+        <% end %>
+      </menu>
+      <% if forem_admin? %>
+        <%= link_to t(".hide.#{@topic.hidden}"), forem.toggle_hide_admin_topic_path(@topic), :method => :put %> |
+        <%= link_to t(".lock.#{@topic.locked}"), forem.toggle_lock_admin_topic_path(@topic), :method => :put %> |
+        <%= link_to t(".pin.#{@topic.pinned}"), forem.toggle_pin_admin_topic_path(@topic), :method => :put %>
       <% end %>
+
+      <% if @topic.pending_review? %>
+        <div class="moderation" id='topic_moderation'>
+          <%= t(".pending_review") %>
+          <% if forem_admin_or_moderator?(@topic.forum) %>
+            <%= form_for @topic, :url => forem.moderate_forum_topic_path(@topic.forum, @topic), :method => :put do |f| %>
+              <%= render "forem/moderation/options", :f => f %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= forem_pages_widget(@posts) %>
+
+      <div id='posts'>
+        <%= render :partial => "forem/posts/post", :collection => @posts %>
+      </div>
+      <div class= "row-fluid show-grid">
+        <div class= "span1"></div>
+        <div class= "span10">
+          <% if forem_user %>
+            <%= simple_form_for [forem, @topic, @topic.posts.new] do |f| %>
+            <div class= "input-big">
+              <%= f.input :text ,:label => t('.your_comment') %>
+              <%= f.submit t("forem.post.buttons.reply") ,:class =>'btn btn-primary btn-small'%>
+            </div>
+
+            <% end %>
+          <% else %>
+            <menu>
+              <% if @topic.can_be_replied_to? && can?(:reply, @topic) %>
+                <%= link_to t(".reply"), forem.new_topic_post_path(@topic),:class =>'btn btn-success btn-small' %>
+              <% end %>
+            </menu>
+          <% end %>
+        </div>
+      </div>
+      <%= forem_pages_widget(@posts) %>
     </div>
-  <% end %>
-
-  <%= forem_pages_widget(@posts) %>
-
-  <div id='posts'>
-    <%= render :partial => "forem/posts/post", :collection => @posts %>
+    </div>
   </div>
-
-  <%= forem_pages_widget(@posts) %>
+  </div>
+  <div class= "span3">
+  <div class= "thumb">
+    <%= link_to image_tag('trade-with-kotak.gif'), main_app.page_path('trade') %>
+  </div>
+  </div>
 </div>

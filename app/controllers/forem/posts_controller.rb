@@ -7,11 +7,7 @@ module Forem
     def new
       authorize! :reply, @topic
       @post = @topic.posts.build
-      @reply_to_post = @topic.posts.find_by_id(params[:reply_to_id])
-
-      if params[:quote]
-        @post.text = view_context.forem_quote(@reply_to_post.text)
-      end
+      redirect_to forum_topic_path(@topic.forum, @topic)
     end
 
     def create
@@ -66,6 +62,30 @@ module Forem
       end
 
     end
+
+    def vote
+      if params[:type] == 'up'
+        value = 1
+        scope = :positive
+      else
+        value =  -1
+        scope = :negative
+      end
+      @post = Post.find(params[:id])
+
+      unless @post.evaluators_for(:votes, :negative).include?(forem_user) || @post.evaluators_for(:votes, :positive).include?(forem_user)
+        @post.add_or_update_evaluation(:votes, value, forem_user, scope)
+      end
+
+      redirect_to :back, notice: t("forem.post.voted")
+    end
+
+    def spam
+      @post = Post.find(params[:id])
+      @post.add_spam_vote_and_check(forem_user)
+      redirect_to :back, notice: t("forem.topic.spam_detected")
+    end
+
 
     private
 

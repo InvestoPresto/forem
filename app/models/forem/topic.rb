@@ -5,6 +5,10 @@ module Forem
     include Forem::Concerns::Viewable
     include Workflow
 
+    default_scope order('views_count desc')
+
+    SPAM_LIMIT = -10
+
     workflow_column :state
     workflow do
       state :pending_review do
@@ -27,6 +31,10 @@ module Forem
     belongs_to :user, :class_name => Forem.user_class.to_s
     has_many   :subscriptions
     has_many   :posts, :dependent => :destroy, :order => "forem_posts.created_at ASC"
+
+    has_reputation :spam_votes,
+                   :source => :user,
+                   :aggregated_by => :sum
 
     accepts_nested_attributes_for :posts
 
@@ -128,6 +136,12 @@ module Forem
 
     def subscription_for user_id
       subscriptions.first(:conditions => { :subscriber_id=>user_id })
+    end
+
+    def add_spam_vote_and_check(user)
+      value = -1
+      add_evaluation(:spam_votes, value, user)
+      update_attribute(:hidden ,true) if reputation_for(:spam_votes).to_i <= SPAM_LIMIT
     end
 
     protected

@@ -1,8 +1,17 @@
-<%= render :partial => 'forem/forums/head', :locals => { :forum => @topic.forum } %>
+<%= render :partial => 'forem/forums/topic_head', :locals => { :forum => @topic.forum } %>
 
-<h2><%= t("forem.post.edit") %></h2>
+<div class= "row">
+  <div class= "span9">
+    <h3><%= t("forem.post.edit") %></h2>
 
-<%= simple_form_for [forem, @topic, @post] do |f| %>
-  <%= render :partial => "form", :locals => { :f => f } %>
-  <%= f.submit t("forem.post.buttons.edit") %>
-<% end %>
+    <%= simple_form_for [forem, @topic, @post] do |f| %>
+      <div class= "input-big">
+        <%= render :partial => "form", :locals => { :f => f } %>
+      </div>
+      <%= f.submit t("forem.post.buttons.edit"), :class => 'btn btn-primary btn-small' %>
+
+    <% end %>
+  </div>
+  <div class= "span3">
+  </div>
+</div>

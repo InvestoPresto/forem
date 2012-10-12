@@ -1,23 +1,29 @@
-<%= render :partial => 'forem/forums/head', :locals => { :forum => @forum } %>
+<div class= "row ">
+  <div class= "span9">
+    <%= render :partial => 'forem/forums/head', :locals => { :forum => @forum } %>
 
-<%= forem_pages_widget(@topics) %>
-
-<table class='topics subdued' cellspacing='0'>
-  <thead>
-    <tr>
-      <th class="icon"></th>
-      <th class="byline"><%= t('forem.topic.headings.topic') -%></th>
-      <th class="latest-post"><%= t('forem.topic.headings.latest') -%></th>
-      <th class="posts-count"><%= t('forem.topic.headings.posts') -%></th>
-      <th class="views-count"><%= t('forem.topic.headings.views') -%></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% if @topics.empty? %>
-      <tr><td colspan='5' align='center'><%= t('forem.topic.none') %></td></tr>
-    <% end %>
-    <%= render @topics %>
-  </tbody>
-</table>
-
-<%= forem_pages_widget(@topics) %>
+    <%= forem_pages_widget(@topics) %>
+    <table class='topics table'>
+      <thead>
+        <tr class= 'info'>
+          <th class="byline span7"><%= t('forem.topic.headings.topic') -%></th>
+          <th class="latest-post span3"><%= t('forem.topic.headings.latest') -%></th>
+          <th class="posts-count align-center span1"><%= t('forem.topic.headings.posts') -%></th>
+          <th class="views-count align-center span1"><%= t('forem.topic.headings.views') -%></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @topics.empty? %>
+          <tr><td colspan='5' align='center'><%= t('forem.topic.none') %></td></tr>
+        <% end %>
+        <%= render @topics %>
+      </tbody>
+    </table>
+  </div>
+  <div class= "span3 show-grid">
+  <div class= "thumb">
+    <%= link_to image_tag('trade-with-kotak.gif'), main_app.page_path('trade') %>
+  </div>
+  </div>
+</div>
+  <%= forem_pages_widget(@topics) %>
