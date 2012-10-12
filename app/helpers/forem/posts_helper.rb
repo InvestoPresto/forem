@@ -1,6 +1,8 @@
 module Forem
   module PostsHelper
-    def forem_avatar(user, options = {})
+    def forem_avatar(post, options = {})
+      user = post.user
+      profile = ProfileDecorator.decorate user.profile
       image = if Forem.avatar_user_method
         # Try to use the user's custom avatar method
         user.try Forem.avatar_user_method.to_sym
@@ -8,7 +10,9 @@ module Forem
         avatar_url user.try(:email), options
       end
 
-      image_tag image, :alt => "Avatar" if image.present?
+      link_to(main_app.public_profile_path post.user.profile) do
+        image_tag profile.avatar_url, :alt => "Avatar"
+      end
     end
 
     def avatar_url(email, options = {})
