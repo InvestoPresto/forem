@@ -1,12 +1,8 @@
-<div class= "row">
-  <div class= "span12">
+<div class= "row ">
+  <div class= "span9">
     <%= render :partial => 'forem/forums/head', :locals => { :forum => @forum } %>
 
     <%= forem_pages_widget(@topics) %>
-  </div>
-</div>
-<div class= "row">
-  <div class= "span8">
     <table class='topics table'>
       <thead>
         <tr class= 'info'>
@@ -24,7 +20,10 @@
       </tbody>
     </table>
   </div>
-  <div class= "span4">
+  <div class= "span3 show-grid">
+  <div class= "thumb">
+    <%= link_to image_tag('trade-with-kotak.gif'), main_app.page_path('trade') %>
+  </div>
   </div>
 </div>
   <%= forem_pages_widget(@topics) %>
