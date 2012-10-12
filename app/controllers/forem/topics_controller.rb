@@ -63,6 +63,13 @@ module Forem
       end
     end
 
+    def spam_vote
+      if find_topic
+        @topic.add_spam_vote_and_check(forem_user)
+        redirect_to :back, notice: t("forem.topic.spam_detected")
+      end
+    end
+
     private
     def find_forum
       @forum = Forem::Forum.find(params[:forum_id])

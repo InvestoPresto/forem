@@ -2,7 +2,7 @@
   <tr class="forum <%= cycle("odd", "even") %>">
     <td>
       <%= link_to forum.title, forem.forum_path(forum), :class => "title" %>
-      <div class='description'><%= forum.description %></div>
+      <div class='description'><p><%= forum.description %></p></div>
       <%= t('forem.forums.index.last_post') -%>
       <span class='last_post'>
           <% if last_post = forum.last_post_for(forem_user) -%>
@@ -12,8 +12,8 @@
           <% end %>
         </span>
     </td>
-    <td class="topics-count"><%= topics_count(forum) %></td>
-    <td class="posts-count"><%= posts_count(forum) %></td>
-    <td class="views-count"><%= forum.views_count %></td>
+    <td class="topics-count align-center"><%= topics_count(forum) %></td>
+    <td class="posts-count align-center"><%= posts_count(forum) %></td>
+    <td class="views-count align-center"><%= forum.views_count %></td>
   </tr>
 <% end %>

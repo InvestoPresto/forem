@@ -1,5 +1,5 @@
 module Forem
-  class SubscriptionMailer < ActionMailer::Base
+  class SubscriptionMailer < PostageApp::Mailer
   	include Resque::Mailer
     default :from => Forem.email_from_address
 
