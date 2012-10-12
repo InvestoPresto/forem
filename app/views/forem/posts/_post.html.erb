@@ -5,7 +5,11 @@
       <div class= "row-fluid">
         <div class= "span1">
           <div class='user'>
-            <div class='icon'><%= forem_avatar(post.user, :size => 60) %>
+            <div class='username'>
+              <%= link_to post.user, main_app.public_profile_path(post.user.profile) %>
+            </div>
+            <div >
+              <%= forem_avatar(post, :size => 60) %>
             </div>
         </div>
       </div>

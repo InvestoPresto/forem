@@ -7,6 +7,16 @@ module Forem
 
     attr_accessible :subscriber_id
 
+    # alias :user_id :subscriber_id
+
+    def user_id
+      self.subscriber_id
+    end
+
+    def user
+      self.subscriber
+    end
+
     def send_notification(post_id)
       SubscriptionMailer.topic_reply(post_id, subscriber.id).deliver
     end
