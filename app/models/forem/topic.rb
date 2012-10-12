@@ -5,8 +5,6 @@ module Forem
     include Forem::Concerns::Viewable
     include Workflow
 
-    default_scope order('views_count desc')
-
     SPAM_LIMIT = -10
 
     workflow_column :state
@@ -61,6 +59,7 @@ module Forem
       end
 
       def by_pinned_or_most_recent_post
+        order('views_count desc').
         order('forem_topics.pinned DESC').
         order('forem_topics.last_post_at DESC').
         order('forem_topics.id')
