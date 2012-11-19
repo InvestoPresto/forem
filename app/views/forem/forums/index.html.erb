@@ -1,18 +1,16 @@
 
-<div id='forums_container' class= "span10">
-  <div class= "row-fluid">
-    <div class= "span9">
-      <h1 id='forums_title'><%= t('.title') %></h1>
-      <div class= "show-grid">
-        <%= link_to t('forem.topic.links.new'), main_app.new_iqanda_path, :class => 'btn btn-success btn-small' %>
-      </div>
-      <%= render @categories %>
+<div class= "row-fluid">
+  <div class= "span9">
+    <h1 id='forums_title'><%= t('.title') %></h1>
+    <div class= "show-grid">
+      <%= link_to t('forem.topic.links.new'), main_app.new_iqanda_path, :class => 'btn btn-success btn-small' %>
     </div>
-    <div class= "span3 show-grid">
-    <div class= "thumb">
-      <%= link_to image_tag('trade-with-kotak.gif'), main_app.page_path('trade') %>
-    </div>
-    </div>
+    <%= render @categories %>
+  </div>
+  <div class= "span3 show-grid">
+  <div class= "thumb">
+    <%= link_to image_tag('trade-with-kotak.gif'), main_app.page_path('trade') %>
+  </div>
   </div>
 </div>
 
