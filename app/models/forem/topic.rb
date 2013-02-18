@@ -48,6 +48,14 @@ module Forem
         where(:hidden => false)
       end
 
+      def find(param)
+        if param.friendly_id?
+          find_by_slug param
+        else
+          find param
+        end
+      end
+
       def by_pinned
         order('forem_topics.pinned DESC').
         order('forem_topics.id')

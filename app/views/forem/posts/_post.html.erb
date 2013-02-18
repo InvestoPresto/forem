@@ -41,9 +41,9 @@
                 <div class= "span2">
                   <span class = "forem_votes pull-right">
                     <% if forem_user %>
-                      <%= link_to image_tag('thumbs_up.png'), vote_topic_post_path(post.topic_id, post, type: "up"), method: "post" %>
+                      <%= link_to image_tag('thumbs_up.png'), forem.vote_topic_post_path(post.topic, post, type: "up") %>
                       <strong class='green'><%= post.reputation_for(:votes, :positive).to_i %></strong>
-                      <%= link_to image_tag('thumbs_down.png'), vote_topic_post_path(post.topic_id, post, type: "down"), method: "post" %>
+                      <%= link_to image_tag('thumbs_down.png'), forem.vote_topic_post_path(post.topic, post, type: "down") %>
                       <strong class='red'><%= post.reputation_for(:votes, :negative).to_i.abs %></strong>
                     <% else %>
                       <%= link_to image_tag('thumbs_up.png'), login_and_go_to(forem.forum_topic_path(post.topic.forum, post.topic)) %>
@@ -57,7 +57,7 @@
                   <div class= "align-center">
                     <% if forem_user %>
                       <% unless forem_user.voted_for_spam?(post) %>
-                          <%= link_to(spam_topic_post_path(post.topic_id, post), method: "post", :title => t('.spam')) do %>
+                          <%= link_to(spam_topic_post_path(post.topic, post), :title => t('.spam')) do %>
                             <i class='icon-ban-circle'></i>
                           <% end %>
                         <% end %>
