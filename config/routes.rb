@@ -13,10 +13,8 @@ Forem::Engine.routes.draw do
 
   resources :topics do
     resources :posts do
-      member do
-        post :vote
-        post :spam
-      end
+      get :vote, :on => :member
+      get :spam, :on => :member
     end
   end
 
