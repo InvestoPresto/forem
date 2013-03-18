@@ -41,10 +41,7 @@
                 <div class= "span2">
                   <span class = "forem_votes pull-right">
                     <% if forem_user %>
-                      <%= link_to image_tag('thumbs_up.png'), forem.vote_topic_post_path(post.topic, post, type: "up") %>
-                      <strong class='green'><%= post.reputation_for(:votes, :positive).to_i %></strong>
-                      <%= link_to image_tag('thumbs_down.png'), forem.vote_topic_post_path(post.topic, post, type: "down") %>
-                      <strong class='red'><%= post.reputation_for(:votes, :negative).to_i.abs %></strong>
+                      <%= render 'forem/posts/thumbs_up_and_down', :post => post %>
                     <% else %>
                       <%= link_to image_tag('thumbs_up.png'), login_and_go_to(forem.forum_topic_path(post.topic.forum, post.topic)) %>
                       <strong class='green'><%= post.reputation_for(:votes, :positive).to_i %></strong>

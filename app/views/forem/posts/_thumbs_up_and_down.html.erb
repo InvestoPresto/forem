@@ -1,0 +1,6 @@
+<div id = 'voting<%= post.id%>' >
+  <%= link_to image_tag('thumbs_up.png'), forem.vote_topic_post_path(post.topic, post, type: "up"), {:remote => true, :id => 'vote_up'} %>
+  <strong class='green'><%= post.reputation_for(:votes, :positive).to_i %></strong>
+  <%= link_to image_tag('thumbs_down.png'), forem.vote_topic_post_path(post.topic, post, type: "down"), {:remote => true, :id => 'vote_down'} %>
+  <strong class='red'><%= post.reputation_for(:votes, :negative).to_i.abs %></strong>
+</div>

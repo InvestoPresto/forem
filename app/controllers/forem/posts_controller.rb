@@ -77,7 +77,10 @@ module Forem
         @post.add_or_update_evaluation(:votes, value, forem_user, scope)
       end
 
-      redirect_to forum_topic_path(@topic.forum, @topic), notice: t("forem.post.voted")
+      respond_to do |format|
+          format.js   { render :layout=>false }
+          format.html { redirect_to forum_topic_path(@topic.forum, @topic), notice: t("forem.post.voted") }
+      end
     end
 
     def spam

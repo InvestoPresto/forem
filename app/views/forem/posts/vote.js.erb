@@ -1,0 +1,1 @@
+$("#voting<%= @post.id%>").replaceWith("<%= escape_javascript(render("thumbs_up_and_down", :post => @post)) %>");
